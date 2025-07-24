@@ -1,0 +1,1269 @@
+<!-- <input type="range" min="0" max="100" value="val" step="1" class="range purple" *ngIf="alertRange" /> -->
+<div class="selectDistrict" *ngIf="selectDistrictPOI">
+    <mat-form-field class="mb-0">
+        <!-- <mat-label><img src="assets/images/map-pin.png" alt="" class="mr-1" /> Location </mat-label> -->
+        <mat-select [(ngModel)]="selectedShelterLocation" (selectionChange)="onShelterLocationChange
+        ($event)" class="mb-0" placeholder="Location">
+            @for (location of locations; track location) {
+            <mat-option [value]="location">{{ location.name }}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+</div>
+<input type="range" min="0" max="100" [value]="rangeValue" (input)="updateRange($event)" step="1" class="range purple"
+    *ngIf="alertRange" />
+
+<div class="hazzardsSlider d-none">
+    <mat-slider min="10" max="900" step="100" showTickMarks discrete>
+        <input matSliderThumb />
+    </mat-slider>
+</div>
+
+<div class="hazzardsSlider">
+    <div class="rangeHazzards" style="--step: 10; --min: 20; --max: 100" *ngIf="hazardRange">
+        <small style="font-size: 10px; position: relative; bottom: -6px; left: 10px">intencity</small>
+        <input type="range" min="20" max="100" step="10" value="30" id="my-range" list="my-datalist" />
+        <datalist id="my-datalist" style="--list-length: 9">
+            <option>>=10</option>
+            <option>9.0-9.9</option>
+            <option>8.0-8.9</option>
+            <option>7.0.7.9</option>
+            <option>6.0-6.9</option>
+            <option>5.0-5.9</option>
+            <option>4.0-4.9</option>
+            <option>3.0-3.9</option>
+        </datalist>
+    </div>
+
+    <div class="rangeRainFall rainRange" style="--step: 4; --min: 0; --max: 100" *ngIf="rainRange">
+        <small style="font-size: 10px; position: relative; bottom: -18px; left: -72px">Rainfall (mm)</small>
+        <input type="range" min="0" max="100" step="4" value="30" id="rain-range" list="rain-datalist1" />
+        <datalist id="rain-datalist" style="--list-length: 4">
+            <option class="one">0.1 - 64.4</option>
+             <option class="two">64.5-115.5</option>
+            <option class="three">115.6 - 204.4</option>
+            <option class="four">>204.5</option>
+
+        </datalist>
+    </div>
+    <div class="rangeRainFall rangeTemp" style="--step: 3; --min: 5; --max: 50" *ngIf="tempRange">
+        <small style="font-size: 10px; position: relative; bottom: -18px; left: -52px">Temp (`C)</small>
+        <input type="range" min="5" max="50" step="16" value="30" id="temp-range" list="temp-datalist1" />
+        <datalist id="temp-datalist" style="--list-length: 11">
+            <option class="one">5</option>
+            <option></option>
+            <option class="two">10</option>
+            <option></option>
+            <option class="three">15</option>
+            <option></option>
+            <option class="four">20</option>
+            <option></option>
+            <option class="five">25</option>
+            <option class="six">28</option>
+            <option class="seven">31</option>
+            <option class="eight">34</option>
+            <option class="nine">37</option>
+            <option class="ten">40</option>
+            <option class="eleven">43</option>
+            <option class="twelve">>=46</option>
+        </datalist>
+    </div>
+    <div class="rangeRainFall windRange" style="--step: 5; --min: 0; --max: 200" *ngIf="windRange">
+        <small style="font-size: 10px; position: relative; bottom: -18px; left: -72px">Wind (kmph)</small>
+        <input type="range" min="0" max="200" step="5" value="0" id="wind-range" list="wind-datalist1" />
+        <datalist id="wind-datalist" style="--list-length: 40">
+            <option class="one">0</option>
+            <option class="two">5</option>
+            <option></option>
+            <option class="three">12</option>
+            <option></option>
+            <option class="four">17</option>
+            <option></option>
+            <option class="five">24</option>
+            <option></option>
+            <option class="six">30</option>
+            <option></option>
+            <option class="seven">37</option>
+            <option></option>
+            <option class="eight">45</option>
+            <option></option>
+            <option></option>
+            <option class="nine">60</option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option class="ten">80</option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option class="eleven">100</option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option class="twelve">120</option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option class="thirteen">>160</option>
+        </datalist>
+    </div>
+
+    <div class="rangeRainFall humidityRange" style="--step: 10; --min: 0; --max: 100" *ngIf="humidityRange">
+        <small style="font-size: 10px; position: relative; bottom: -18px; left: -76px">Humidity (%rh)</small>
+        <input type="range" min="10" max="100" step="10" value="10" id="humidity-range" list="humidity-datalist2" />
+        <datalist id="humidity-datalist" style="--list-length: 10">
+            <!-- <option class="d1">0</option> -->
+            <option class="zero">10</option>
+            <option class="one">30</option>
+            <option></option>
+            <option class="two">50</option>
+            <option class="three">60</option>
+            <option class="four">70</option>
+            <option class="five">80</option>
+            <option class="six">>90</option>
+            <option></option>
+        </datalist>
+    </div>
+
+    <div class="rangeRainFall populationRange" style="--step: 10; --min: 0; --max: 100" *ngIf="populationRange">
+        <small style="font-size: 10px; position: relative; bottom: -18px; left: -76px">Population</small>
+        <input type="range" min="10" max="100" step="10" value="10" id="population-range" list="population-datalist2" />
+        <datalist id="population-datalist" style="--list-length: 10">
+            <option class="one">1</option>
+            <option class="two">1000</option>
+            <option class="three">5000</option>
+            <option class="four">10000</option>
+            <option class="five">50000</option>
+            <option class="six">100000</option>
+            <option class="seven">200000</option>
+            <option class="eight">500000</option>
+            <option class="nine">1000000</option>
+            <option>2000000</option>
+        </datalist>
+    </div>
+
+
+    <div class="rangeRainFall landSlideRange" style="--step: 10; --min: 0; --max: 100" *ngIf="landSlideRange">
+        <!-- <small style="font-size: 10px; position: relative; bottom: -18px; left: -76px">Humidity (%rh)</small> -->
+        <input type="range" min="10" max="100" step="3" value="33" id="landSlide-range" list="landSlide-datalist2" />
+        <datalist id="landSlide-datalist" style="--list-length: 3">
+            <!-- <option class="d1">0</option> -->
+            <option class="hhz">HHZ</option>
+            <option class="mhz">MHZ</option>
+            <option class="lhz">LHZ</option>
+        </datalist>
+    </div>
+    <div class="rangeRainFall floodRange" style="--step: 10; --min: 0; --max: 100" *ngIf="floodRange">
+        <!-- <small style="font-size: 10px; position: relative; bottom: -18px; left: -76px">Humidity (%rh)</small> -->
+        <input type="range" min="10" max="100" step="2" value="50" id="flood-range" list="flood-datalist2" />
+        <datalist id="flood-datalist" style="--list-length: 2">
+            <option class="water">Waterbody</option>
+            <option class="plain">Flood Plain</option>
+        </datalist>
+    </div>
+</div>
+
+<div class="allAlerts" *ngIf="hideAllAlerts">
+    <a class="close" style="cursor: pointer" (click)="onAlertsCloseClick()"><span><img src="assets/images/x-circle.svg"
+                alt="Close" /></span></a>
+    <div class="scroller">
+        @if(orangeAlertDistrictNames.length>0 || redAlertDistrictNames.length>0){
+        @if(orangeAlertDistrictNames.length>0){
+        <div class="smAlerts orange">
+            <img src="assets/images/alert-triangle-icon-sm.svg" /><span>ORANGE ALERT IN {{
+                orangeAlertDistrictNames.length }} DISTRICT</span>
+            <button class="btn" (click)="onAlertsShowInfoClick('Orange Alert')">
+                Know more
+            </button>
+        </div>
+        }
+        @if(redAlertDistrictNames.length>0){
+        <div class="smAlerts red">
+            <img src="assets/images/alert-circle-sm.svg" /><span>RED ALERT IN {{ redAlertDistrictNames.length }}
+                DISTRICT</span>
+            <button class="btn" (click)="onAlertsShowInfoClick('Red Alert')">
+                Know more
+            </button>
+        </div>
+        }
+        }@else{
+        <img src="assets/images/alert-circle-sm.svg" /><span>Alerts not found</span>
+        }
+
+    </div>
+</div>
+
+<div class="showAlertInfo pl-4" *ngIf="hideAlertsInfo">
+    <div class="text-right">
+        <img src="assets/images/close.svg" alt="" class="closeImg" (click)="closeAllHideAlerts()" />
+    </div>
+
+    <div class="heading">
+        {{ alertType }}
+        <img src="assets/images/havyRainCloud.svg" alt="" width="80px" />
+    </div>
+
+    @if(alertType==='Red Alert'){
+
+    <mat-form-field>
+        <mat-label>Select Alert Type</mat-label>
+        <mat-select placeholder="Select Alert Type" [(ngModel)]="selectedAlert" (selectionChange)="onRedAlertChange()">
+            <mat-option *ngFor="let alert of uniqueAlerts" [value]="alert">{{
+                alert
+                }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    } @if(alertType==='Orange Alert'){
+    <mat-form-field>
+        <!-- <mat-label>Select Alert Type</mat-label> -->
+        <mat-select placeholder="Select Alert Type" [(ngModel)]="selectedAlert"
+            (selectionChange)="onOrangeAlertChange()">
+            <mat-option *ngFor="let alert of uniqueAlerts" [value]="alert">{{
+                alert
+                }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    }
+
+    <div class="subheading mt-2 d-none">
+        Very heavy rain <br />(6 cm to 20 cm).
+    </div>
+    <div class="cityInfo mt-2">
+        <!-- <ul style="cursor: pointer;">
+            <div *ngFor="let name of districtNameData">
+                <li #name (click)="onShelterInfoOpenClick(name)">{{name}}</li>
+            </div>
+        </ul> -->
+
+        <ul style="cursor: pointer;">
+            <div *ngFor="let name of districtNameData">
+                <li #name (click)="onShelterInfoOpenClick(name)">{{ name }}</li>
+            </div>
+        </ul>
+    </div>
+</div>
+
+<div *ngIf="hideSearchInfo">
+    <!-- <div class="search-field-global d-md-block">
+        <form class="d-flex align-items-center h-100" action="#">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <img src="assets/images/search.svg" alt="" width="24px" class="ml-2" />
+                </div>
+                <input type="text" class="form-control bg-transparent border-0" placeholder="Search area here" />
+            </div>
+        </form>
+    </div> -->
+
+    <div class="showSearchInfo">
+        <div class="heading">
+            <div class="search-field-global">
+                <form class="d-flex align-items-center" action="#">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <img src="assets/images/search.svg" alt="" width="24px" class="ml-2" />
+                        </div>
+                        <input [value]="selectedDistrict" [disabled]="true" type="text"
+                            class="form-control bg-transparent border-0" placeholder="Search area here" />
+                    </div>
+                </form>
+            </div>
+            <img src="assets/images/close.svg" alt="" (click)="onSearchInfoCloseClick()" />
+        </div>
+        <div class="subheading">Result</div>
+        <br>
+        <div class="showResult">
+            <div class="result" *ngFor="let i of shelterInfoOfDistrict">
+                <p style="cursor: pointer;" (click)="particularShelterClicked(i)">
+                    <strong>{{i.lsg}}</strong><br />
+                    District : {{i.district}}
+                </p>
+                <button class="btn btn-link" (click)="openInGoogleMaps(i.lat,i.lon)">
+                    <img src="assets/images/corner-down-right.svg" alt="" />
+                    <span> Get Direction</span>
+                </button>
+            </div>
+
+            <div class="d-flex mt-2 mb-5">
+                <div class="mapinfoBtn mr-2">
+                    <img src="assets/images/hospital.svg" alt="" />
+                    <span>Hospitals</span>
+                </div>
+                <div class="mapinfoBtn mr-2">
+                    <img src="assets/images/police.svg" alt="" />
+                    <span>Police</span>
+                </div>
+                <div class="mapinfoBtn">
+                    <img src="assets/images/police.svg" alt="" />
+                    <span>Police</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="search-field-global" *ngIf="hideShelterInfo">
+    <form class="d-flex align-items-center h-100" action="#">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <img src="assets/images/search.svg" alt="" width="24px" class="ml-2" />
+            </div>
+            <input value="Kannur" type="text" class="form-control bg-transparent border-0"
+                placeholder="Search area here" />
+        </div>
+    </form>
+</div>
+
+<div class="showShelterInfo" *ngIf="hideShelterInfo">
+    <div class="bgImg"></div>
+    <div class="heading p-4">
+        <div class="search-field-global">
+            <form class="d-flex align-items-center" action="#">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <img src="assets/images/search.svg" alt="" width="24px" class="ml-2" />
+                    </div>
+                    <input type="text" class="form-control bg-transparent border-0" placeholder="Search area here" />
+                </div>
+            </form>
+        </div>
+        <img src="assets/images/close.svg" alt="" (click)="onShelterInfoCloseClick()" class="closeImg" />
+    </div>
+    <div class="subheading p-4">
+        <p>
+            <strong>Lorem Ipsum </strong><br />
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        </p>
+
+        <p></p>
+
+        <p><strong>Lorem Ipsum </strong></p>
+        <div class="findShelters">
+            <div class="shelter">
+                <img src="assets/images/Rectangle 196.png" alt="" />
+                <p>
+                    <strong>Lorem Ipsum </strong><br />Lorem Ipsum is simply dummy tex
+                </p>
+            </div>
+            <div class="shelter">
+                <img src="assets/images/Rectangle 197.png" alt="" />
+                <p>
+                    <strong>Lorem Ipsum </strong><br />Lorem Ipsum is simply dummy tex
+                </p>
+            </div>
+            <div class="shelter">
+                <img src="assets/images/Rectangle 196.png" alt="" />
+                <p>
+                    <strong>Lorem Ipsum </strong><br />Lorem Ipsum is simply dummy tex
+                </p>
+            </div>
+            <div class="shelter">
+                <img src="assets/images/Rectangle 197.png" alt="" />
+                <p>
+                    <strong>Lorem Ipsum </strong><br />Lorem Ipsum is simply dummy tex
+                </p>
+            </div>
+
+            <div class="shelter">
+                <img src="assets/images/Rectangle 196.png" alt="" />
+                <p>
+                    <strong>Lorem Ipsum </strong><br />Lorem Ipsum is simply dummy tex
+                </p>
+            </div>
+            <div class="shelter">
+                <img src="assets/images/Rectangle 197.png" alt="" />
+                <p>
+                    <strong>Lorem Ipsum </strong><br />Lorem Ipsum is simply dummy tex
+                </p>
+            </div>
+            <div class="shelter">
+                <img src="assets/images/Rectangle 196.png" alt="" />
+                <p>
+                    <strong>Lorem Ipsum </strong><br />Lorem Ipsum is simply dummy tex
+                </p>
+            </div>
+            <div class="shelter">
+                <img src="assets/images/Rectangle 197.png" alt="" />
+                <p>
+                    <strong>Lorem Ipsum </strong><br />Lorem Ipsum is simply dummy tex
+                </p>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-primary">View More</button>
+        </div>
+    </div>
+</div>
+
+<div class="bottomLeftinfo" *ngIf="hideAlerts">
+    <div class="mapinfoBtn mb-1" (click)="onShowAllAlertsClick()" style="cursor: pointer">
+        <img src="assets/images/alert-circle 1.svg" alt="" />
+        <span>Alerts</span>
+    </div>
+    <div class="mapinfoBtn" (mouseover)="onHazzardsHover()" style="cursor: pointer" (click)="getHazardData('Flood')">
+        <img src="assets/images/Flood-Streamline.svg" alt="" />
+        <span>Flood</span>
+    </div>
+</div>
+<div class="bottomLeftinfoMore" *ngIf="hideHazzardsMore">
+    <div class="mapinfoBtn" style="cursor: pointer" (click)="getHazardData('Cyclone')">
+        <img src="assets/images/cyclone.svg" alt="" />
+        <span>Cyclone</span>
+    </div>
+    <div class="mapinfoBtn" style="cursor: pointer" (click)="getHazardData('Drought')">
+        <img src="assets/images/drought.svg" alt="" />
+        <span>Drought</span>
+    </div>
+    <div class="mapinfoBtn" style="cursor: pointer" (click)="onHazzardsMoreClick()">
+        <span>More</span>
+    </div>
+</div>
+<div class="hazzardInfo" *ngIf="hideAlertPopup">
+    <a class="close" (click)="onAlertPopupClick()"><span>x</span></a>
+    <div class="scroller" style="height: 70vh">
+        <img src="assets/images/earthquakeImg.jpg" alt="" class="img-fluid" />
+    </div>
+</div>
+
+<div class="bottomLeftinfoAll" *ngIf="hideHazzardsAll">
+    <!-- <a class="close" style="cursor: pointer;" (click)="onHazzardsCloseClick()"><span>x</span></a> -->
+    <a class="close" style="cursor: pointer" (click)="onHazzardsCloseClick()"><span><img
+                src="assets/images/x-circle.svg" alt="Close" /></span></a>
+    <div class="allHazards">
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="getHazardData('Earthquake')">
+            <img src="assets/images/earthquake.svg" alt="" />
+            <span>Earthquake</span>
+        </div>
+
+
+        <!-- <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="getHazardData('HighTide')">
+            <img src="assets/images/icon_Tsunami.svg" alt="" />
+            <span>High Wave Tides</span>
+        </div> -->
+
+        <!-- <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="getHazardData('LowTide')">
+            <img src="assets/images/icon_Tsunami.svg" alt="" />
+            <span>High Low Tides</span>
+        </div> -->
+
+        <div class="mapinfoBtn less mb-1" style="cursor: pointer; position: relative">
+            <img src="assets/images/icon_lightning_thunder.svg" alt="" class="less" />
+            <span class="less">Lightning</span>
+
+            <div class="mapinfoBtn more mb-1">
+                <img src="assets/images/icon_lightning_thunder.svg" alt="" />
+                <span (click)="getHazardData('Lightning')" style="cursor: pointer">Lightning</span>
+                <span class="same" (click)="getHazardData('Thunder')" style="cursor: pointer">Thunder
+                    Storm</span>
+            </div>
+        </div>
+
+        <div class="mapinfoBtn mb-1" style="cursor: pointer; position: relative">
+            <img src="assets/images/icon_oceanState.svg" alt="" class="less" />
+            <span class="less">Ocean State</span>
+
+            <div class="mapinfoBtn more mb-1">
+                <img src="assets/images/icon_oceanState.svg" alt="" />
+                <span (click)="getHazardData('OceanState')" style="cursor: pointer">Ocean State</span>
+                <span class="same" (click)="getHazardData('LowTide')" style="cursor: pointer;height: 22px;">High Low
+                    Tides</span>
+                <span class="same" (click)="getHazardData('HighTide')" style="cursor: pointer;height: 22px;">High Wave
+                    Tides</span>
+                <span class="same" (click)="getHazardData('SwellSurge')" style="cursor: pointer;height: 22px;">Swell
+                    Surge</span>
+            </div>
+        </div>
+
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="getHazardData('Tsunami')">
+            <img src="assets/images/icon_Tsunami.svg" alt="" />
+            <span>Tsunami</span>
+        </div>
+        <!-- <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="getHazardData('SwellSurge')">
+            <img src="assets/images/icon_oceanState.svg" alt="" />
+            <span>Swell Surge</span>
+        </div> -->
+
+        <div class="mapinfoBtn mb-1 d-none" style="cursor: pointer">
+            <img src="assets/images/icon_analytics.svg" alt="" />
+            <span>Analytics</span>
+        </div>
+    </div>
+</div>
+
+<div class="bottomRightPOIall" *ngIf="hidePOIall">
+    <!-- <a class="close" style="cursor: pointer;" (click)="onPOIsCloseClick()"><span>x</span></a> -->
+    <a class="close" style="cursor: pointer" (click)="onPOIsCloseClick()"><span><img src="assets/images/x-circle.svg"
+                alt="Close" /></span></a>
+    <div class="allPOIs">
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('reEWDS_669')">
+            <img src="assets/images/POI/reliefCamp.png" alt="" matTooltip="Relief Camp" />
+            <span>Relief Camp</span>
+        </div>
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('diEWDS_1804')">
+            <img src="assets/images/POI/dischargeGauges.png" alt="" matTooltip="Discharge Gauges" />
+            <span>Discharge Gauges</span>
+        </div>
+        <div class="mapinfoBtn less mb-1" style="cursor: pointer; position: relative;" (click)="fetchPOI('hoEWDS_668')">
+            <img src="assets/images/POI/Hospitals.png" alt="" class="less" matTooltip="Hospitals" />
+            <span class="less">Hospitals</span>
+
+            <div class="mapinfoBtn more mb-1">
+                <img src="assets/images/POI/Hospitals.png" alt="" matTooltip="Hospitals" matTooltipPosition="right" />
+                <span>Hospitals</span>
+                <span class="same" style="cursor: pointer" (click)="fetchPOI('prEWDS_1799')" matTooltip="Private"
+                    matTooltipPosition="right">Private</span>
+                <span class="same" style="cursor: pointer" (click)="fetchPOI('otEWDS_1797')" matTooltip="Other Covid"
+                    matTooltipPosition="right">Other Covid</span>
+            </div>
+        </div>
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('poEWDS_666')">
+            <img src="assets/images/POI/Police.png" alt="" matTooltip="Police" />
+            <span>Police</span>
+        </div>
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('daEWDS_1803')">
+            <img src="assets/images/POI/Dams.png" alt="" matTooltip="Dams" />
+            <span>Dams</span>
+        </div>
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('scEWDS_672')">
+            <img src="assets/images/POI/Schools.png" alt="" matTooltip="Schools" />
+            <span>Schools</span>
+        </div>
+        <!-- <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('shEWDS_1789')">
+            <img src="assets/images/POI/Shelter.png" alt="" />
+            <span>Shelter</span>
+        </div> -->
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('buEWDS_670')">
+            <img src="assets/images/POI/BusStation.png" alt="" matTooltip="Bus Station" />
+            <span>Bus Station</span>
+        </div>
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('fiEWDS_667')">
+            <img src="assets/images/POI/FireStation.png" alt="" matTooltip="Fire Station" />
+            <span>Fire Station</span>
+        </div>
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('heEWDS_1802')">
+            <img src="assets/images/POI/Helipad.png" alt="" matTooltip="Helipad" />
+            <span>Helipad</span>
+        </div>
+        <!-- <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('crEWDS_1778')">
+            <img src="assets/images/POI/Critical_Infra.png" alt="" />
+            <span>Critical Infra</span>
+        </div> -->
+        <div class="mapinfoBtn less mb-1" style="position: relative;">
+            <img src="assets/images/POI/Population.png" alt="" class="less" matTooltip="Population"
+                matTooltipPosition="right" />
+            <span class="less">Population</span>
+
+            <div class="mapinfoBtn more mb-1">
+                <img src="assets/images/POI/Population.png" alt="" />
+                <span style="cursor: pointer" matTooltip="Population" matTooltipPosition="right">Population</span>
+                <span class="same" style="cursor: pointer" (click)="fetchPOI('diEWDS_1783')" matTooltip="District"
+                    matTooltipPosition="right">District</span>
+                <span class="same" style="cursor: pointer" (click)="fetchPOI('lsEWDS_1785')" matTooltip="LSG"
+                    matTooltipPosition="right">LSG</span>
+                <span class="same" style="cursor: pointer" (click)="fetchPOI('taEWDS_1784')" matTooltip="Taluka"
+                    matTooltipPosition="right">Taluka</span>
+            </div>
+        </div>
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('waEWDS_1772')">
+            <img src="assets/images/POI/waterKiosk.png" alt="" matTooltip="Water Kiosk" />
+            <span>Water Kiosk</span>
+        </div>
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('eoEWDS_1805')">
+            <img src="assets/images/POI/EOC_Location.png" alt="" matTooltip="EOC" />
+            <span>EOC Location</span>
+        </div>
+        <!-- <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('roEWDS_1777')">
+            <img src="assets/images/POI/RoadClosure.png" alt="" />
+            <span>Road Closure</span>
+        </div> -->
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('haEWDS_1787')">
+            <img src="assets/images/POI/HazardousLocation.png" alt="" matTooltip="Hazardous" />
+            <span>Hazardous Location</span>
+        </div>
+        <!-- <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('maEWDS_1821')">
+            <img src="assets/images/POI/MastyaBhavan.png" alt="" />
+            <span>Mastya Bhavan</span>
+        </div> -->
+        <!-- <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('phEWDS_1820')">
+            <img src="assets/images/POI/PHQ.png" alt="" />
+            <span>PHQ</span>
+        </div> -->
+        <!-- <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('juEWDS_1801')">
+            <img src="assets/images/POI/Junction.png" alt="" />
+            <span>Junction</span>
+        </div> -->
+        <!-- <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('plEWDS_1800')">
+            <img src="assets/images/POI/Places.png" alt="" />
+            <span>Places Names</span>
+        </div> -->
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('hoEWDS_674')">
+            <img src="assets/images/POI/Hotels.png" alt="" matTooltip="Hotels" />
+            <span>Hotels</span>
+        </div>
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('grEWDS_671')">
+            <img src="assets/images/POI/GroceryStore.png" alt="" matTooltip="Ration Shops" />
+            <span>Ration Shops</span>
+        </div>
+        <!-- <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('voEWDS_1779')">
+            <img src="assets/images/POI/Volunteer.png" alt="" />
+            <span>Volunteer</span>
+        </div> -->
+    </div>
+</div>
+<div class="bottomRightPOI" *ngIf="hidePOIs">
+    <a class="close" style="cursor: pointer" (click)="onPOIcloseClick()"><span><img src="assets/images/x-circle.svg"
+                alt="" /></span></a>
+
+    <div class="mb-1">
+        <!-- <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('shEWDS_1789')">
+            <img src="assets/images/POI/Shelter.png" alt="" />
+            <span>Shelter</span>
+        </div> -->
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('hoEWDS_668')">
+            <img src="assets/images/POI/Hospitals.png" alt="" matTooltip="Hospitals" />
+            <span>Hospitals</span>
+        </div>
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="fetchPOI('poEWDS_666')">
+            <img src="assets/images/POI/Police.png" alt="" matTooltip="Police" />
+            <span>Police</span>
+        </div>
+        <div class="mapinfoBtn mb-1" style="cursor: pointer" (click)="onPOIMoreClick()">
+            <mat-icon>more_horiz</mat-icon>
+            <span>More</span>
+        </div>
+    </div>
+</div>
+
+     @if(opacitySection){
+  <div
+    class="opacitySlider"
+    *ngIf="!isMobile"
+  >
+    <img
+      src="assets/images/close.svg"
+      style="width: 14px; height: 14px; cursor: pointer; margin-right:5px;"
+      alt="Close"
+      (click)="closeOpacitySection()"
+    />
+<mat-slider min="0" max="100" step="10" showTickMarks discrete [displayWith]="formatLabel" 
+[formControl]="sliderControl" name="opacitySlider" color="warn" verticle>
+ <input matSliderThumb [formControl]="sliderControl">
+</mat-slider>
+</div>
+    <!-- <div
+      class="rightMapInfoBtn"
+      style="display: flex; margin-right: 200px; column-gap: 20px"
+      *ngIf="!isMobile"
+    >
+      <div class="rightMapInfoBtn" (click)="handleOpacity(0.2)">
+        <span
+          matTooltip="Population"
+          matTooltipPosition="after"
+          style="cursor: pointer"
+          >20%</span
+        >
+      </div>
+
+      <div class="rightMapInfoBtn" (click)="handleOpacity(0.4)">
+        <span
+          matTooltip="Population"
+          matTooltipPosition="after"
+          style="cursor: pointer"
+          >40%</span
+        >
+      </div>
+
+      <div class="rightMapInfoBtn" (click)="handleOpacity(0.5)">
+        <span
+          matTooltip="Population"
+          matTooltipPosition="after"
+          style="cursor: pointer"
+          >50%</span
+        >
+      </div>
+
+      <div class="rightMapInfoBtn" (click)="handleOpacity(0.7)">
+        <span
+          matTooltip="Population"
+          matTooltipPosition="after"
+          style="cursor: pointer"
+          >70%</span
+        >
+      </div>
+
+      <div class="rightMapInfoBtn" (click)="handleOpacity(1)">
+        <span
+          matTooltip="Population"
+          matTooltipPosition="after"
+          style="cursor: pointer"
+          >100%</span
+        >
+      </div>
+    </div> -->
+  
+  }
+
+<div class="bottomRightinfo" [ngClass]="{'shift320': !shift320}">
+
+  
+    <div class="rightMapInfoBtn" (click)="statePopulation()" *ngIf="!isMobile">
+        <img src="assets/images/POI/population.svg" alt="" style="width:18px;" matTooltip="Population"
+            matTooltipPosition="after" />
+    </div>
+
+    <div class="rightMapInfoBtn" (click)="addLandSlideSuspectabilityToMap()" *ngIf="!isMobile">
+        <!-- <span class="material-symbols-outlined" title="Landslide Susceptibility" alt="Landslide Susceptibility">
+            cancel
+        </span> -->
+        <img src="assets/images/landslide_sm.svg" alt="" style="width:18px;" matTooltip="Landslide Susceptibility"
+            matTooltipPosition="after" />
+    </div>
+
+    <div class="rightMapInfoBtn" (click)="addFloodSuspectabilityToMap()" *ngIf="!isMobile">
+        <!-- <span class="material-symbols-outlined" title="Flood Susceptibility" alt="Flood Susceptibility">
+            home
+        </span> -->
+        <img src="assets/images/flood_sm.svg" alt="" style="width:18px;" matTooltip="Flood Susceptibility"
+            matTooltipPosition="after" />
+    </div>
+
+    <div class="rightMapInfoBtn" (click)="enablePinning()" *ngIf="!isMobile">
+        <span class="material-symbols-outlined" matTooltip="Drop Pin" matTooltipPosition="after" style="color:#3F3F41;">
+            pin_drop
+        </span>
+    </div>
+
+    <div class="rightMapInfoBtn" (click)="onPOIshowClick()" matTooltip="POI" matTooltipPosition="after">POI</div>
+    <div class="rightMapInfoBtn" (click)="zoomOut()">
+        <img src="assets/images/POI/Distance.svg" alt="" matTooltip="Zoom TO Center" matTooltipPosition="after" />
+    </div>
+    <div class="rightMapInfoBtn" (click)="maximizeScreen()" title="Maximize" alt="Maximize">
+        <img src="assets/images/POI/Corners.svg" alt="" matTooltip="Maximize" matTooltipPosition="after" />
+    </div>
+    <!-- <div class="rightMapInfoBtn d-none" (click)="showChatWindow()">
+        <img src="assets/images/POI/message-square.svg" alt="" />
+    </div> -->
+    <div class="rightMapInfoBtn" (click)="returnToOriginalMap()" title="Reset" alt="Reset">
+        <img src="assets/images/POI/refresh.svg" alt="" matTooltip="Reset" matTooltipPosition="after" />
+    </div>
+</div>
+<div class="chatBtn flex-row" (click)="showChatWindow()" style="cursor:pointer">
+    <img src="assets/images/chatbot.svg" alt="" width="40px" />
+    <span style="margin-top: -10px; display:none">Chatbot</span>
+</div>
+<!-- <div class="chatBtn flex-row" (click)="dynamicOpacityAdjustment()" style="cursor:pointer">
+    <img src="assets/images/chatbot.svg" alt="" width="40px" />
+    <span style="margin-top: -10px; display:none">DOA</span>
+</div> -->
+
+<div #map id="map" class="map"></div>
+<!-- <button style="padding: 20px;" (click)="enablePinning()" class="dropPin">Drop Pin</button> -->
+
+<!-- <div #rippleRed id="rippleRed" class="rippleRed"></div>
+<div #rippleOrange id="rippleOrange" class="rippleOrange"></div> -->
+
+<!-- <div id="popup" class="ol-popup">
+    <a id="popup-closer" class="ol-popup-closer" (click)="popupCloser()"></a>
+    <div id="popup-content" style="color: black;">
+        <div class="header"> <span>KANNUR </span> <span
+                class="d-flex justify-content-between align-items-center ml-2">26°C <img
+                    src="assets/images/RainyCloud.svg" alt=""></span></div>
+        <span class="d-block text-right" style="margin-top: -20px;"><small>Heavy Rainfall</small></span>
+        <div class="moreAlerts d-flex flex-column mt-2">
+            <div class="d-flex justify-content-between"><span>Red alert in 4 cities</span> <button
+                    class="btn btn-sm btn-primary">See More</button> </div>
+            <div class="d-flex justify-content-between"><span>Red alert in 4 cities</span> <button
+                    class="btn btn-sm btn-primary">See More</button> </div>
+
+        </div>
+        <div class="d-flex justify-content-center"> <button
+                class="btn btn-sm btn-primary d-flex justify-content-between align-items-center mt-2"
+                [matMenuTriggerFor]="menuAction"><span>Take action</span>
+                <mat-icon>keyboard_arrow_down</mat-icon></button></div>
+        <mat-menu #menuAction="matMenu">
+
+            <button mat-menu-item>Report an Event</button>
+            <button mat-menu-item>Find Shelters</button>
+            <button mat-menu-item>Find Volunteers</button>
+            <button mat-menu-item>Connect to Help line</button>
+
+        </mat-menu>
+    </div>
+</div> -->
+
+<!-- pin info -->
+
+<div id="pinPopup" class="ol-popup" style="min-width: 180px">
+    <a id="pin-popup-closer" class="ol-popup-closer" (click)="pinPopupClose()"></a>
+    <div id="pin-popup-content">
+        <button (click)="openCreateIncidentForm()" class="btn btn-sm btn-primary btn-block">
+            Create Incident
+        </button>
+        <!-- <button (click)="openCreateIncidentForm()" class="btn btn-sm btn-primary btn-block">Create Incident</button> -->
+    </div>
+</div>
+
+<div id="popup" class="ol-popup">
+    <a id="popup-closer" class="ol-popup-closer" (click)="popupCloser()"></a>
+    <div id="popup-content" style="color: black">
+        <div class="w-100 p-0" *ngIf="poiName">
+            <span style="font-weight: bold">Name :</span> {{ poiName }}
+        </div>
+        <div class="w-100 p-0" *ngIf="message">
+            <span style="font-weight: bold">Message :</span> {{ message }}
+        </div>
+        <div class="w-100 p-0" *ngIf="lsgName">
+            <span style="font-weight: bold">Lsg :</span> {{ lsgName }}
+        </div>
+
+        <div class="w-100 p-0" *ngIf="date">
+            <span style="font-size:small">Date :</span> {{ date }}
+        </div>
+
+        <div class="w-100 p-0" *ngIf="depth">
+            <span style="font-weight: bold">Depth : </span>{{ depth }}
+        </div>
+
+        <div class="w-100 p-0" *ngIf="magnitude">
+            <span style="font-weight: bold">Magitude :</span> {{ magnitude }}
+        </div>
+
+        <div class="w-100 p-0" *ngIf="direction">
+            <span style="font-weight: bold">Direction :</span> {{ direction }}
+        </div>
+
+        <div class="w-100 p-0" *ngIf="phoneNumber">
+            <span style="font-weight: bold">Phone number :</span> {{ phoneNumber }}
+        </div>
+        <div class="w-100 p-0" *ngIf="timings">
+            <span style="font-weight: bold">Timings :</span> {{ timings }}
+        </div>
+
+        <div class="w-100 p-0" *ngIf="noofbeds">
+            <span style="font-weight: bold">No of beds :</span> {{ noofbeds }}
+        </div>
+        <div class="w-100 p-0" *ngIf="noofrooms">
+            <span style="font-weight: bold">No of rooms :</span> {{ noofrooms }}
+        </div>
+
+        <div class="w-100 p-0" *ngIf="camptype">
+            <span style="font-weight: bold">camptype : </span>{{ camptype }}
+        </div>
+        <div class="w-100 p-0" *ngIf="capacity">
+            <span style="font-weight: bold">capacity :</span> {{ capacity }}
+        </div>
+        <div class="w-100 p-0" *ngIf="rooms">
+            <span style="font-weight: bold">rooms : </span>{{ rooms }}
+        </div>
+        <div class="w-100 p-0" *ngIf="toilets">
+            <span style="font-weight: bold">toilets : </span>{{ toilets }}
+        </div>
+
+        <div class="w-100 p-0" *ngIf="cat">
+            <span style="font-weight: bold">cat : </span>{{ cat }}
+        </div>
+        <div class="w-100 p-0" *ngIf="storage">
+            <span style="font-weight: bold">storage :</span> {{ storage }}
+        </div>
+
+        <div class="w-100 p-0" *ngIf="schoolcode">
+            <span style="font-weight: bold">schoolcode :</span> {{ schoolcode }}
+        </div>
+        <div class="w-100 p-0" *ngIf="schoolcategory">
+            <span style="font-weight: bold">schoolcategory :</span> {{ schoolcategory }}
+        </div>
+        <div class="w-100 p-0" *ngIf="totalclassroom">
+            <span style="font-weight: bold">totalclassroom :</span> {{ totalclassroom }}
+        </div>
+
+        <div class="w-100 p-0" *ngIf="totalpopulation">
+            <span style="font-weight: bold">Total Population :</span> {{ totalpopulation }}
+        </div>
+        <div class="w-100 p-0" *ngIf="menpopulation">
+            <span style="font-weight: bold">Male :</span> {{ menpopulation }}
+        </div>
+        <div class="w-100 p-0" *ngIf="womenpopulation">
+            <span style="font-weight: bold">Female :</span> {{ womenpopulation }}
+        </div>
+        <!-- <div class="w-100 p-0" *ngIf="childrenpopulation">
+            <span style="font-weight: bold">childrenpopulation :</span> {{ childrenpopulation }}
+        </div> -->
+
+        <div class="w-100 p-0" *ngIf="startdate">
+            <span style="font-weight: bold">startdate :</span> {{ startdate }}
+        </div>
+        <div class="w-100 p-0" *ngIf="time">
+            <span style="font-weight: bold">time :</span> {{ time }}
+        </div>
+    </div>
+</div>
+
+<div id="weather-live" (click)="onWetherClick()" *ngIf="hideWeatherLive">
+    <div class="d-flex flex-row justify-content-around align-items-center pb-0">
+        <span>24°C</span>
+        <img src="assets/images/sun cloudy.png" alt="" width="28px" />
+    </div>
+</div>
+
+<div>
+    <div id="weather-detail">
+        <!-- weather detail -->
+        <div class="weather-widget pl-3" *ngIf="hideWeather">
+            <div class="weather-header">
+                <div class="datePick" (click)="onShowCalendarClick()">
+                    <img src="assets/images/Calendar.svg" alt="" />
+                    <mat-icon>chevron_left</mat-icon>
+                    <span>18/09/2024</span> <mat-icon>chevron_right</mat-icon>
+                </div>
+                <button (click)="onCloseClick()" class="bg-transparent border-0">
+                    <img src="assets/images/x-circle.svg" alt="" />
+                </button>
+            </div>
+
+            <div class="more-details d-flex flex-row">
+                <div class="weather-today">
+                    <div class="weather-info">
+                        <p>Today, 18 September</p>
+                        <div class="header">
+                            <span>
+                                <h2>
+                                    34°C <br />
+                                    Sunny
+                                </h2>
+                            </span>
+                            <img src="assets/images/sunny.svg" alt="" />
+                        </div>
+                        <div class="weather-details">
+                            <div class="d-flex align-items-center">
+                                <i class="material-symbols-outlined md-24 menu-icon">air</i><span> Wind | 15 km/h</span>
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                                <i class="material-symbols-outlined md-24 menu-icon">water_drop</i>
+                                <span>Hum | 26%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weather-forecast d-flex flex-row">
+                    <div class="day">
+                        <p>29°C</p>
+                        <div class="imgCloud" style="background-image: url('assets/images/cloud1.svg')"></div>
+                        <!-- <img src="assets/images/Cloud_1.svg" alt=""> -->
+                        <p>MON</p>
+                    </div>
+                    <div class="day">
+                        <p>26°C</p>
+                        <div class="imgCloud" style="background-image: url('assets/images/cloud1.svg')"></div>
+                        <p>TUE</p>
+                    </div>
+                    <div class="day">
+                        <p>24°C</p>
+                        <div class="imgCloud" style="background-image: url('assets/images/cloud2.svg')"></div>
+                        <p>WED</p>
+                    </div>
+                    <div class="day">
+                        <p>23°C</p>
+                        <div class="imgCloud" style="background-image: url('assets/images/cloud3.svg')"></div>
+                        <p>THU</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="weatherCalendar" *ngIf="hideWeatherCalendar">
+    <mat-card class="demo-inline-calendar-card">
+        <mat-calendar [(selected)]="selected"></mat-calendar>
+        <mat-card-footer class="d-flex justify-content-between p-2 pb-0 mtFooter">
+            <span class="d-none">{{ selected() }}</span><span class="setDate">18/09/2024</span><button
+                class="btn btn-primary btn-sm">
+                Set Date
+            </button>
+        </mat-card-footer>
+    </mat-card>
+</div>
+<div class="mobElement" id="helplineM" *ngIf="isMobile" (click)="showHelpInfo()">Help line</div>
+<div class="mobElement" id="helplineMinfo" *ngIf="hideHelpInfo">Help line <br />
+    State : 112, 1070,1090 <br />
+    District: 1077</div>
+
+<mat-form-field id="weather-map" *ngIf="showWeatherSelect">
+    <!-- <mat-label>Weather Forecast</mat-label> -->
+    <mat-select placeholder="Weather Forecast" [(ngModel)]="hideLocationSelection"
+        (selectionChange)="selectForecastOptions()" *ngIf="showWeatherSelect">
+        @for (weather of weathers; track weather) {
+        <mat-option [value]="weather.value">{{
+            weather.viewValue
+            }}</mat-option>
+        }
+
+    </mat-select>
+</mat-form-field>
+<mat-form-field id="weather-map" *ngIf="closeWeatherSelect" (click)="toggleWeatherSelection()">
+    <mat-label><img src="assets/images/x-circle.svg" alt="" class="mr-1" width="14" />Close Selection</mat-label>
+    <mat-select placeholder="Close Selection">
+
+    </mat-select>
+</mat-form-field>
+
+<mat-accordion id="Locations" *ngIf="weatherSelectionOption">
+    <mat-form-field class="mb-0">
+        <!-- <mat-label><img src="assets/images/map-pin.png" alt="" class="mr-1" /> Location </mat-label> -->
+        <mat-select [(ngModel)]="selectedLocation" (selectionChange)="onLocationChange($event)" class="mb-0"
+            placeholder="Location">
+            @for (location of locations; track location) {
+            <mat-option [value]="location.name">{{ location.name }}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="mb-0 mt-0">
+        <!-- <mat-label>Source</mat-label> -->
+        <mat-select [(ngModel)]="selectedForecast" (selectionChange)="weatherForecastSource()" class="mb-0"
+            placeholder="Imd">
+
+            <mat-option *ngIf="weatherForecastSelect" value="ibm" selected>IBM</mat-option>
+            <mat-option value="imd">IMD WRF</mat-option>
+            <mat-option *ngIf="weatherForecastSelect" value="imd_gfs">IMD GFS</mat-option>
+            <mat-option *ngIf="weatherForecastSelect" value="imd_ncum">IMD NCUM</mat-option>
+            <mat-option value="skymet">Skymet</mat-option>
+            <mat-option *ngIf="weatherForecastSelect" value="ensemble">Ensemble</mat-option>
+
+        </mat-select>
+    </mat-form-field>
+
+    <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)" class="mt-0">
+        <mat-expansion-panel-header>
+            <mat-panel-title><img src="assets/images/RainIcon.svg" alt="" class="mr-1" /> Rain
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a (click)="getActualWeatherData('rain-3',this.selectedForecast)" class="btn-link btn-block  mt-0"
+            *ngIf="actualWeatherSelect">{{dayBeforeYesterday}}</a>
+        <a (click)="getActualWeatherData('rain-2',this.selectedForecast)" class="btn-link btn-block  mt-0"
+            *ngIf="actualWeatherSelect">{{Yesterday}}</a>
+        <a (click)="getActualWeatherData('rain-1',this.selectedForecast)" class="btn-link btn-block  mt-0"
+            *ngIf="actualWeatherSelect">{{today |
+            date:'dd-MM-YYYY'}}</a>
+        <a (click)="getForecastData('rain-1',this.selectedForecast)" class="btn-link btn-block  mt-0"
+            *ngIf="weatherForecastSelect">{{today |
+            date:'dd-MM-YYYY'}}</a>
+        <a (click)="getForecastData('rain-2',this.selectedForecast)" class="btn-link btn-block mt-0"
+            *ngIf="weatherForecastSelect">{{tomorrow}}</a>
+        <a (click)="getForecastData('rain-3',this.selectedForecast)" class="btn-link btn-block mt-0"
+            *ngIf="weatherForecastSelect">{{dayAfterTomorrow }}</a>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+        <mat-expansion-panel-header>
+            <mat-panel-title><img src="assets/images/WindIcon.svg" alt="" class="mr-1" />
+                Wind
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a (click)="getActualWeatherData('wind-3',this.selectedForecast)" class="btn-link btn-block  mt-0"
+            *ngIf="actualWeatherSelect">{{dayBeforeYesterday}}</a>
+        <a (click)="getActualWeatherData('wind-2',this.selectedForecast)" class="btn-link btn-block  mt-0"
+            *ngIf="actualWeatherSelect">{{Yesterday}}</a>
+        <a (click)="getActualWeatherData('wind-1',this.selectedForecast)" class="btn-link btn-block  mt-0"
+            *ngIf="actualWeatherSelect">{{today |
+            date:'dd-MM-YYYY'}}</a>
+        <a (click)="getForecastData('wind-1',this.selectedForecast)" class="btn-link btn-block  mt-0"
+            *ngIf="weatherForecastSelect">{{today |
+            date:'dd-MM-YYYY'}}</a>
+        <a (click)="getForecastData('wind-2',this.selectedForecast)" class="btn-link btn-block mt-0"
+            *ngIf="weatherForecastSelect">{{tomorrow}}</a>
+        <a (click)="getForecastData('wind-3',this.selectedForecast)" class="btn-link btn-block mt-0"
+            *ngIf="weatherForecastSelect">{{dayAfterTomorrow }}</a>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+        <mat-expansion-panel-header>
+            <mat-panel-title><img src="assets/images/TempratureIcon.svg" alt="" class="mr-1" />
+                Temperature
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a (click)="getActualWeatherData('temp-3',this.selectedForecast)" class="btn-link btn-block  mt-0"
+            *ngIf="actualWeatherSelect">{{dayBeforeYesterday}}</a>
+        <a (click)="getActualWeatherData('temp-2',this.selectedForecast)" class="btn-link btn-block  mt-0"
+            *ngIf="actualWeatherSelect">{{Yesterday}}</a>
+        <a (click)="getActualWeatherData('temp-1',this.selectedForecast)" class="btn-link btn-block  mt-0"
+            *ngIf="actualWeatherSelect">{{today |
+            date:'dd-MM-YYYY'}}</a>
+        <a (click)="getForecastData('temp-1',this.selectedForecast)" class="btn-link btn-block  mt-0"
+            *ngIf="weatherForecastSelect">{{today |
+            date:'dd-MM-YYYY'}}</a>
+        <a (click)="getForecastData('temp-2',this.selectedForecast)" class="btn-link btn-block mt-0"
+            *ngIf="weatherForecastSelect">{{tomorrow}}</a>
+        <a (click)="getForecastData('temp-3',this.selectedForecast)" class="btn-link btn-block mt-0"
+            *ngIf="weatherForecastSelect">{{dayAfterTomorrow }}</a>
+    </mat-expansion-panel>
+
+    @if(false){
+    <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+        <mat-expansion-panel-header>
+            <mat-panel-title><img src="assets/images/weatherMapIcon/humidity.svg" alt="" class="mr-1" />
+                Humidity
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a (click)="getActualWeatherData('humidity-3',this.selectedForecast)" class="btn-link btn-block mt-0"
+            *ngIf="actualWeatherSelect">{{dayBeforeYesterday}}</a>
+        <a (click)="getActualWeatherData('humidity-2',this.selectedForecast)" class="btn-link btn-block mt-0"
+            *ngIf="actualWeatherSelect">{{Yesterday}}</a>
+        <a (click)="getActualWeatherData('humidity-1',this.selectedForecast)" class="btn-link btn-block  mt-0"
+            *ngIf="actualWeatherSelect">{{today |
+            date:'dd-MM-YYYY'}}</a>
+        <a (click)="getForecastData('humidity-1',this.selectedForecast)" class="btn-link btn-block  mt-0"
+            *ngIf="weatherForecastSelect">{{today |
+            date:'dd-MM-YYYY'}}</a>
+        <a (click)="getForecastData('humidity-2',this.selectedForecast)" class="btn-link btn-block mt-0"
+            *ngIf="weatherForecastSelect">{{tomorrow}}</a>
+        <a (click)="getForecastData('humidity-3',this.selectedForecast)" class="btn-link btn-block mt-0"
+            *ngIf="weatherForecastSelect">{{dayAfterTomorrow }}</a>
+    </mat-expansion-panel>
+    }
+</mat-accordion>
+
+
+<mat-form-field id="local-insight" class="d-none">
+    <mat-label>Local Insights</mat-label>
+    <mat-select placeholder="Local Insights">
+        @for (local of locals; track local) {
+        <mat-option [value]="local.value"><img [src]="local.icon" alt="" class="mr-1" />{{
+            local.viewValue
+            }}</mat-option>
+        }
+    </mat-select>
+</mat-form-field>
+
+<div id="WeatherForcastDetails" class="d-none">
+    <div class="d-none">
+        <div class="tblHeading d-flex flex-row justify-content-between">
+            <span class="w-75">
+                Weather Forecast: Rainfall (in mm)
+                <br />
+                District : 14 | Taluka: 77 | LSG: 1038
+            </span>
+            <span class="w-25 align-content-end text-right"> State : Kerala </span>
+        </div>
+        <div class="tblHeading d-flex flex-row justify-content-between border-top-0">
+            <span class="w-75"> Home </span>
+            <span class="w-25 align-content-end text-right font-weight-normal">
+                Clear Layers <br />
+                Total Colum :4
+            </span>
+        </div>
+
+        <table class="table table-borderless w-100">
+            <thead class="border-bottom border-dark text-uppercase">
+                <tr>
+                    <th class="text-left">District</th>
+                    <th>23-01-2023</th>
+                    <th>24-01-2023</th>
+                    <th>25-01-2023</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of items">
+                    <td class="text-left">{{ item.District }}</td>
+                    <td>{{ item.Date1 }}</td>
+                    <td>{{ item.Date2 }}</td>
+                    <td>{{ item.Date3 }}</td>
+                    <td><img src="{{ item.View }}" alt="" style="width: 10px" /></td>
+                </tr>
+            </tbody>
+            <tfoot class="border-top border-dark">
+                <tr>
+                    <td></td>
+                    <td>Previous</td>
+                    <td>Next</td>
+                    <td colspan="2">
+                        Generate report
+                        <img src="assets/images/icon_download.svg" alt="" style="width: 14px" />
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="tblHeading d-flex flex-row justify-content-between border-top-0">
+        <span class="w-60 text-uppercase text-danger"> Earthquake </span>
+        <span class="w-auto align-content-end text-right text-uppercase">
+            <form class="d-flex align-items-center search-field mt-1 mb-1" action="#">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <img src="assets/images/search.svg" alt="" width="24px" class="ml-2" />
+                    </div>
+                    <input type="text" class="form-control bg-transparent border-0 p-0"
+                        placeholder="Search area here" />
+                </div>
+            </form>
+        </span>
+    </div>
+    <table class="table table-borderless w-100">
+        <thead class="border-bottom border-dark text-uppercase">
+            <tr>
+                <th class="text-left" colspan="5">Last Proceed Time</th>
+                <th class="text-right">total 1</th>
+            </tr>
+        </thead>
+        <thead class="border-bottom border-dark text-uppercase">
+            <tr>
+                <th class="text-left">Updated date</th>
+                <th>Location</th>
+                <th>Direction</th>
+                <th>Magnitude</th>
+                <th>Lsg</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <tr *ngFor="let location of earthQuakes">
+                <td class="text-left">{{ location.Date }}</td>
+                <td style="white-space: nowrap">{{ location.Location }}</td>
+                <td>{{ location.Direction }}</td>
+                <td>{{ location.Magnitude }}</td>
+                <td>{{ location.Lsg }}</td>
+                <td><img src="{{ location.View }}" alt="" style="width: 10px" /></td>
+            </tr> -->
+        </tbody>
+        <tfoot class="border-top border-dark">
+            <tr>
+                <td></td>
+
+                <td>Previous</td>
+                <td class="text-right">Next</td>
+                <td colspan="3" class="text-right">
+                    Generate report
+                    <img src="assets/images/icon_download.svg" alt="" style="width: 14px" />
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<ng-container *ngIf="reloading">
+    <div class="overlay"></div>
+    <mat-spinner strokeWidth="4" diameter="50"></mat-spinner>
+</ng-container>
+
+
+
+<div class="chatWindow" style="height: 400px;" *ngIf="chatWindow">
+    <a class="iframeclose" (click)="onIframeCloseClick()" *ngIf="chatWindowClose">
+        <!-- <img src="assets/images/x-circle.svg" alt="Close" /> -->
+    </a>
+
+    <iframe src="http://220.225.195.184:8080/EWDSChatBot/" frameborder="0" width="100%" style="height: 100%;"
+        scrolling="yes" (load)="onLoadIframe()">
+    </iframe>
+</div>
